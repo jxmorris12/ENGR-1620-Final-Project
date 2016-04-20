@@ -1,5 +1,13 @@
 /* File created by Jack Morris on 04/18/16*/
 
+* { 
+  color: #333; /* pretty dark gray */
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-variant: normal;
+  text-align: center;
+}
+
 body {
   background: #fafafa;
 }
@@ -24,10 +32,8 @@ path:hover {
   transform: translateY(-5px); /* hop */   
 }
 
-* { 
-  color: #333; /* pretty dark gray */
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-variant: normal;
-  text-align: center;
+#edit {
+  position: absolute;
+  top: 0;
+  left: 0;
 }

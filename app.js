@@ -19,14 +19,38 @@ var buildings =
   "Thornton",
   "Wilsdorf"
   ];
-
 loadBuildings();
-// loadPenguins();
-
-
-
+//
 var step = 0; 
 var numOfSteps = buildings.length;
+//
+var editing = false;
+//
+function edit() {
+  if(!editing) {
+    //
+    $('path')
+      .css('stroke-dasharray','5,5')
+      .css('stroke-width','2')
+      .css('stroke','blue');
+    //
+    $('#edit')
+      .text('View Mode');
+    //
+    editing = true;
+  } else {
+    //
+    $('path')
+      .css('stroke-dasharray','')
+      .css('stroke-width','1')
+      .css('stroke','gray');
+    //
+    $('#edit')
+      .text('Content Editor');
+    //
+    editing = false;
+  }
+}
 
 function loadPenguins() {
   loadSVGFromAddress("https://rawgit.com/VengadoraVG/moving-to-gnulinux/master/img/tux.svg", "");
