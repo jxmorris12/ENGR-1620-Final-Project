@@ -1,0 +1,25 @@
+/* File created by Jack Morris on 04/18/16*/
+
+html, body { 
+  margin:0; padding:0; overflow:hidden 
+}
+
+#map {
+  position: fixed;
+  top: 0;
+  bottom:0;
+  left: 0;
+  right:0;
+}
+
+path {
+  stroke: gray;
+}
+
+path:hover {
+  fill: gray;
+}
+
+* {
+  font-family: monospace;
+}
