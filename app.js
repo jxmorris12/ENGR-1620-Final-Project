@@ -51,10 +51,7 @@ function loadSVGFromAddress(base, name) {
     var importedNode = $( document.importNode(xml.documentElement, true) );
     var path = importedNode.find("path");
     //
-    var name = path.attr("id");
-    path.append("title").text(name);
-    //
-    svg[0].appendChild(path[0].cloneNode(true));
+    // add mouseover label (later!)
     //
     step++;
   });
