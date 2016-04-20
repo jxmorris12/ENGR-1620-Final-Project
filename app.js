@@ -2,10 +2,6 @@
 
 console.log('app.js loaded');
 
-//Width and height
-var w = 1500;
-var h = 1500;
-
 // var address = "https://rawgit.com/VengadoraVG/moving-to-gnulinux/master/img/tux.svg"
 var buildings = 
   [
@@ -45,7 +41,7 @@ function loadBuildings() {
 
 function loadSVGFromAddress(base, name) {
   //Create SVG Element
-  var svg = $("#map").attr("width", w).attr("height", h);
+  var svg = $("#map"); //.attr("width", w).attr("height", h);
   var address = base + name;
 
   //Import the plane
@@ -53,7 +49,6 @@ function loadSVGFromAddress(base, name) {
   d3.xml(address, "image/svg+xml", function(xml) { 
     var importedNode = $( document.importNode(xml.documentElement, true) );
     var path = importedNode.find("path");
-    path.attr("fill", "#e0e0e0");
     //
     svg[0].appendChild(path[0].cloneNode(true));
     step++;
