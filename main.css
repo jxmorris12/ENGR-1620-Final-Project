@@ -1,28 +1,30 @@
 /* File created by Jack Morris on 04/18/16*/
 
-html, body { 
-  margin:0; 
-  padding:0; 
-  overflow:hidden;
+body {
+  background: #fafafa;
 }
 
 #map {
-  position: fixed;
-  top: 0;
+  position: absolute;
+  top: 75px; /* room for header */
   left: 0;
-  height: 100%;
+  height: calc(100% - 75px);
   width: 100%;
 }
 
 path {
-  fill: #e0e0e0;
-  stroke: gray;
+  fill: #e0e0e0; /* really light gray */
+  stroke: gray; /* normal gray */
 }
 
 path:hover {
   fill: gray;
 }
 
-* {
-  font-family: monospace;
+* { 
+  color: #333; /* pretty dark gray */
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-variant: normal;
+  text-align: center;
 }
