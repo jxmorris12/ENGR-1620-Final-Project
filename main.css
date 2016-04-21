@@ -34,6 +34,15 @@ path:hover {
 
 #edit {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 10px;
+  left: 10px;
+  background: none;
+  border: 1px solid black;
+
+  padding: 15px;
+  font-size: 15px;
+}
+
+#edit:focus {
+  outline: none;
 }

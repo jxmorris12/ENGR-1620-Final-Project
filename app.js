@@ -2,6 +2,12 @@
 
 console.log('app.js loaded');
 
+/// set funcs
+
+$('svg').click(function(evt) {
+  console.log('x:',evt.clientX,'\ty:',evt.clientY);
+});
+
 // var address = "https://rawgit.com/VengadoraVG/moving-to-gnulinux/master/img/tux.svg"
 var buildings = 
   [
