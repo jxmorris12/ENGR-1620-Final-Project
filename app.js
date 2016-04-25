@@ -6,10 +6,11 @@ console.log('app.js loaded');
 
 $('svg').click(function(evt) {
   console.log('x:',evt.clientX,'\ty:',evt.clientY);
+  evt.cancelBubble = false; // ??¿
+  drawNode(evt.clientX,evt.clientY);
 });
 
-// var address = "https://rawgit.com/VengadoraVG/moving-to-gnulinux/master/img/tux.svg"
-var buildings = 
+var buildingNames = 
   [
   "Bavaro",
   "Chem",
@@ -25,10 +26,13 @@ var buildings =
   "Thornton",
   "Wilsdorf"
   ];
+var buildings = {};
+//
 loadBuildings();
+loadBuildingObjects();
 //
 var step = 0; 
-var numOfSteps = buildings.length;
+var numOfSteps = buildingNames.length;
 //
 var editing = false;
 //
@@ -58,17 +62,26 @@ function edit() {
   }
 }
 
-function loadPenguins() {
-  loadSVGFromAddress("https://rawgit.com/VengadoraVG/moving-to-gnulinux/master/img/tux.svg", "");
-}
-
 function loadBuildings() {
-  var addressBase = "final project/vectors/";
-  for(var i in buildings) {
-    var buildingName = buildings[i];
+  var addressBase = "SEAS_map/vectors/";
+  for(var i in buildingNames) {
+    var buildingName = buildingNames[i];
     loadSVGFromAddress(addressBase, buildingName);
   }
 }
+
+function drawNode(x, y) {
+  var svg = $('svg');
+  var rect = document.createElement('rect');
+  rect = $(rect);
+   // put x and y first !
+  rect.attr('x',x).attr('y',y)
+  .attr('width',50).attr('height',50);
+  /* .attr('style',
+    'fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9'); */
+  svg.append(rect);
+}
+
 
 function loadSVGFromAddress(base, name) {
   //Create SVG Element
@@ -87,4 +100,19 @@ function loadSVGFromAddress(base, name) {
     //
     step++;
   });
+}
+//
+
+function loadBuildingObjects() {
+  for(var i in buildingNames) {
+    var x = {};
+    x.name = buildingNames[i];
+    buildings[x.name] = x;
+    //
+    var dropdown = $('<option value="'+x.name+'">'+x.name+'</option>')[0]
+    .appendTo( $('#from') )
+    .appendTo( $('#destination') )
+    //
+    console.log('appending',dropdown);
+  }
 }

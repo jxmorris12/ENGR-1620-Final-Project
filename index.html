@@ -2,7 +2,8 @@
 <html lang="en" ng-app="app">
 <head>
 
-  <base href="/"> 
+  <!-- <base href="/~jm8wx/">  -->
+  <base href = "/">
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +15,7 @@
   <!-- CSS Stylesheets -->
 
   <!-- My CSS Sheets -->
-  <link href="final project/main.css" rel="stylesheet"> 
+  <link href="SEAS_map/main.css" rel="stylesheet"> 
 
   <!-- Fonts -->
   <!-- Open Sans -->
@@ -33,10 +34,18 @@
 
 <body>
   <h1> SEAS Accessability Map </h1>
-  <button id="edit" onclick="edit()"> Content Editor </button>
+  <div id="menu"> 
+    <button id="edit" onclick="edit()"> Content Editor </button>
+    <select id="from">
+      <option value="" default selected>Starting Point</option>
+    </select>
+    <select id="destination" placeholder="Destination">
+      <option value="" default selected>Destination</option>
+    </select>
+  </div>
   <svg id="map" viewBox="0 0 1200 1200" preserveAspectRatio="xMidYMid meet"> </svg>
 </body>
 
-<script type="text/javascript" src="final project/app.js"></script>
+<script type="text/javascript" src="SEAS_map/app.js"></script>
 
 </html>
