@@ -4,10 +4,20 @@ console.log('app.js loaded');
 
 /// set funcs
 
-$('svg').click(function(evt) {
-  console.log('x:',evt.clientX,'\ty:',evt.clientY);
-  evt.cancelBubble = false; // ??¿
-  drawNode(evt.clientX,evt.clientY);
+$('#map').click(function(evt) {
+  var offset = $('#map').offset();
+  var x = evt.clientX - offset.left; 
+  var y = evt.clientY - offset.top;
+  //
+  var viewboxMax = 1200;
+  var xMax = $('#map').width();
+  var yMax = $('#map').height();
+  //
+  var sx = x / xMax * viewboxMax;
+  var sy = y / yMax * viewboxMax;
+  //
+  console.log('x:',sx,'\ty:',sy);
+  drawNode(sx,sy);
 });
 
 var buildingNames = 
@@ -67,16 +77,19 @@ function loadBuildings() {
 }
 
 function drawNode(x, y) {
-  /* TODO : scale x & y */
+  var rectSize = 50;
+  // scale x/y so cursor is in the center of shape
+  x -= rectSize / 2;
+  y -= rectSize / 2;
   // append x/y rect to DOM
   var r = ' <rect ';
   r += 'x=\"' + x
     + '\" y=\"' + y
-    + '\" width=\"' + 50
-    + '\" height=\"' + 50
+    + '\" width=\"' + rectSize
+    + '\" height=\"' + rectSize
     + '\"/>';
   // hack hack hackity hack
-  $('svg')[0].innerHTML += r; 
+  $('#map')[0].innerHTML += r; 
 }
 
 
@@ -92,7 +105,7 @@ function loadSVGFromAddress(base, name) {
     //
     // add mouseover label (later)
     //
-    svg[0].appendChild(path[0].cloneNode(true));
+    svg.append(path[0].cloneNode(true));
     //
   });
 }
