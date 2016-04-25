@@ -69,10 +69,8 @@ path:hover {
 rect {
   /* nodes */
   fill:blue;
-  stroke:pink;
-  stroke-width:5;
-  fill-opacity:0.1;
-  stroke-opacity:0.9;
+  fill-opacity:0.5;
+  border-radius: 50%; /*circle haha*/
 }
 
 

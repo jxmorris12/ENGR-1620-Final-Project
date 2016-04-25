@@ -5,20 +5,32 @@ console.log('app.js loaded');
 /// set funcs
 
 $('#map').click(function(evt) {
-  var offset = $('#map').offset();
-  var x = evt.clientX - offset.left; 
-  var y = evt.clientY - offset.top;
   //
-  var viewboxMax = 1200;
-  var xMax = $('#map').width();
-  var yMax = $('#map').height();
-  //
-  var sx = x / xMax * viewboxMax;
-  var sy = y / yMax * viewboxMax;
+  var s = scaleCoordsInMap(evt.clientX,evt.clientY);
+  var sx = s[0];
+  var sy = s[1];
   //
   console.log('x:',sx,'\ty:',sy);
   drawNode(sx,sy);
 });
+
+function scaleCoordsInMap(x, y) {
+  //
+  var map = $('#map');
+  //
+  var offset = map.offset();
+  x = x - offset.left;
+  y = y - offset.top;
+  //
+  var viewboxMax = 1200;
+  var xMax = map.width();
+  var yMax = map.height();
+  //
+  var sx = (x / xMax) * viewboxMax;
+  var sy = (y / yMax) * viewboxMax;
+  //
+  return [sx, sy];
+}
 
 var buildingNames = 
   [
@@ -77,16 +89,16 @@ function loadBuildings() {
 }
 
 function drawNode(x, y) {
-  var rectSize = 50;
+  var size = 10;
   // scale x/y so cursor is in the center of shape
-  x -= rectSize / 2;
-  y -= rectSize / 2;
+  x -= size / 2;
+  y -= size / 2;
   // append x/y rect to DOM
   var r = ' <rect ';
   r += 'x=\"' + x
     + '\" y=\"' + y
-    + '\" width=\"' + rectSize
-    + '\" height=\"' + rectSize
+    + '\" width=\"' + size
+    + '\" height=\"' + size
     + '\"/>';
   // hack hack hackity hack
   $('#map')[0].innerHTML += r; 
