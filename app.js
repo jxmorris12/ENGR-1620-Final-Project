@@ -109,9 +109,9 @@ function loadBuildingObjects() {
     x.name = buildingNames[i];
     buildings[x.name] = x;
     //
-    var dropdown = $('<option value="'+x.name+'">'+x.name+'</option>')[0]
-    .appendTo( $('#from') )
-    .appendTo( $('#destination') )
+    var dropdown = $('<option value="'+x.name+'">'+x.name+'</option>');
+    $('#from')        .append( dropdown.clone() );
+    $('#destination') .append( dropdown.clone() );
     //
     console.log('appending',dropdown);
   }

@@ -7,6 +7,13 @@
   font-variant: normal;
   text-align: center;
 }
+* > * {
+  color: #333; /* pretty dark gray */
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-variant: normal;
+  text-align: center;
+}
 
 body {
   background: #fafafa;
@@ -14,10 +21,10 @@ body {
 
 #map {
   position: absolute;
-  top: 75px; /* room for header */
-  left: 0;
-  height: calc(100% - 75px);
-  width: 100%;
+  top: 65px; /* room for header */
+  left: 150px;
+  height: calc(100% - 65px);
+  width: calc(100%-150px);
 }
 
 path {
@@ -42,17 +49,17 @@ rect {
 }
 
 #menu {
-  /*position:absolute;*/
+  position:absolute;
+  top:0;
+  left:5px;
+  width:140px;
+  height:100%;
   /*border: 5px dashed blue;*/
 }
 
 #edit {
-  position: absolute;
-  top: 10px;
-  left: 10px;
   background: none;
   border: 1px solid black;
-
   padding: 15px;
   font-size: 15px;
 }
