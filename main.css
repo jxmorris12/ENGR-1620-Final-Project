@@ -14,12 +14,8 @@ body {
 
 #menu {
   padding: 15px;
-  /*position:absolute;*/
-  /*top:0;*/
-  /*left:5px;*/
   width:140px;
   height:100%;
-  /*border: 5px dashed blue;*/
 }
 
 #menu > * {
@@ -89,7 +85,7 @@ button {
   -webkit-tap-highlight-color: transparent;
   z-index: 1;
   /* Color: blue */
-  background-color: #2196f3 !important;
+  background-color: #2196f3;
   /* Important button styling rules */
   border: none;
   border-radius: 2px;

@@ -41,8 +41,8 @@ function edit() {
     //
     $('path')
       .css('stroke-dasharray','5,5')
-      .css('stroke-width','2')
-      .css('stroke','blue');
+      .css('stroke-width','4')
+      .css('stroke','#2196f3');
     //
     $('#edit')
       .text('View Mode');
