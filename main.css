@@ -12,14 +12,21 @@ body {
   background: #fafafa;
 }
 
+#header {
+  margin-left: 150px;
+}
+
 #menu {
   padding: 15px;
   width:140px;
-  height:100%;
+  /**/
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 #menu > * {
-  margin: 15px;
+  margin: 15px; 
 }
 
 #edit {
@@ -44,7 +51,7 @@ optgroup {
   top: 65px; /* room for header */
   left: 150px;
   height: calc(100% - 65px);
-  width: calc(100%-150px);
+  width: calc(100% - 150px);
 }
 
 path {

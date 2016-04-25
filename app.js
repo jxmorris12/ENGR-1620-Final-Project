@@ -28,11 +28,7 @@ var buildingNames =
   ];
 var buildings = {};
 //
-loadBuildings();
 loadBuildingObjects();
-//
-var step = 0; 
-var numOfSteps = buildingNames.length;
 //
 var editing = false;
 //
@@ -71,15 +67,16 @@ function loadBuildings() {
 }
 
 function drawNode(x, y) {
-  var svg = $('svg');
-  var rect = document.createElement('rect');
-  rect = $(rect);
-   // put x and y first !
-  rect.attr('x',x).attr('y',y)
-  .attr('width',50).attr('height',50);
-  /* .attr('style',
-    'fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9'); */
-  svg.append(rect);
+  /* TODO : scale x & y */
+  // append x/y rect to DOM
+  var r = ' <rect ';
+  r += 'x=\"' + x
+    + '\" y=\"' + y
+    + '\" width=\"' + 50
+    + '\" height=\"' + 50
+    + '\"/>';
+  // hack hack hackity hack
+  $('svg')[0].innerHTML += r; 
 }
 
 
@@ -89,7 +86,6 @@ function loadSVGFromAddress(base, name) {
   var address = base + name;
 
   //Import the plane
-  step++;
   d3.xml(address, "image/svg+xml", function(xml) { 
     var importedNode = $( document.importNode(xml.documentElement, true) );
     var path = importedNode.find("path");
@@ -98,12 +94,12 @@ function loadSVGFromAddress(base, name) {
     //
     svg[0].appendChild(path[0].cloneNode(true));
     //
-    step++;
   });
 }
 //
 
 function loadBuildingObjects() {
+  // create objects
   for(var i in buildingNames) {
     var x = {};
     x.name = buildingNames[i];
@@ -113,6 +109,7 @@ function loadBuildingObjects() {
     $('#fromoptgroup').append( dropdown.clone() );
     $('#destoptgroup').append( dropdown.clone() );
     //
-    console.log('appending',dropdown);
   }
+// objects created
+loadBuildings();
 }
