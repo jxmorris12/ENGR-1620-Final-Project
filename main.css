@@ -7,16 +7,40 @@
   font-variant: normal;
   text-align: center;
 }
-* > * {
-  color: #333; /* pretty dark gray */
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-variant: normal;
-  text-align: center;
-}
 
 body {
   background: #fafafa;
+}
+
+#menu {
+  padding: 15px;
+  /*position:absolute;*/
+  /*top:0;*/
+  /*left:5px;*/
+  width:140px;
+  height:100%;
+  /*border: 5px dashed blue;*/
+}
+
+#menu > * {
+  margin: 15px;
+}
+
+#edit {
+  padding: 15px;
+  font-size: 18px;
+}
+
+#edit:focus {
+  outline: none;
+}
+
+.placeSelect {
+  width: 80%;
+}
+
+optgroup {
+  font-size:20px;
 }
 
 #map {
@@ -48,22 +72,35 @@ rect {
   stroke-opacity:0.9;
 }
 
-#menu {
-  position:absolute;
-  top:0;
-  left:5px;
-  width:140px;
-  height:100%;
-  /*border: 5px dashed blue;*/
+
+/* Via Materialize CSS */
+.card {
+  position: relative;
+  margin: 0.5rem 0 1rem 0;
+  background-color: #fff;
+  transition: box-shadow .25s;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
 }
 
-#edit {
-  background: none;
-  border: 1px solid black;
-  padding: 15px;
-  font-size: 15px;
+button {
+  cursor: pointer;
+  display: inline-block;
+  -webkit-tap-highlight-color: transparent;
+  z-index: 1;
+  /* Color: blue */
+  background-color: #2196f3 !important;
+  /* Important button styling rules */
+  border: none;
+  border-radius: 2px;
+  color: #fff;
+  letter-spacing: .5px;
+  /* Materialize shadow */
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
 }
 
-#edit:focus {
-  outline: none;
+button:hover {
+  box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
 }
+
+/* End Materialize CSS */

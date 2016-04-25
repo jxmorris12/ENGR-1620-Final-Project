@@ -110,8 +110,8 @@ function loadBuildingObjects() {
     buildings[x.name] = x;
     //
     var dropdown = $('<option value="'+x.name+'">'+x.name+'</option>');
-    $('#from')        .append( dropdown.clone() );
-    $('#destination') .append( dropdown.clone() );
+    $('#fromoptgroup').append( dropdown.clone() );
+    $('#destoptgroup').append( dropdown.clone() );
     //
     console.log('appending',dropdown);
   }

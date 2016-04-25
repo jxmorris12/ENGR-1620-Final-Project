@@ -34,13 +34,17 @@
 
 <body>
   <h1> SEAS Accessability Map </h1>
-  <div id="menu"> 
-    <button id="edit" onclick="edit()"> Content Editor </button>
-    <select id="from">
-      <option value="" default selected>Starting Point</option>
+  <div class="card" id="menu"> 
+    <button class="materializeButton" id="edit" onclick="edit()"> Content Editor </button>
+    <select class="placeSelect" id="from">
+      <optgroup id="fromoptgroup">
+        <option value="" default selected>Starting Point</option>
+      </optgroup>
     </select>
-    <select id="destination" placeholder="Destination">
-      <option value="" default selected>Destination</option>
+    <select class="placeSelect" id="destination" placeholder="Destination">
+      <optgroup id="destoptgroup">
+        <option value="" default selected>Destination</option>
+      </optgroup>
     </select>
   </div>
   <svg id="map" viewBox="0 0 1200 1200" preserveAspectRatio="xMidYMid meet"> </svg>
