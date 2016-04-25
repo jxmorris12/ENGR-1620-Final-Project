@@ -117,7 +117,7 @@ function loadSVGFromAddress(base, name) {
     //
     // add mouseover label (later)
     //
-    svg.append(path[0].cloneNode(true));
+    svg.append(path.clone());
     //
   });
 }

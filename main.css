@@ -13,13 +13,12 @@ body {
 }
 
 #header {
-  margin-left: 150px;
+  margin-left: 185px;
 }
 
 #menu {
   padding: 15px;
   width:140px;
-  /**/
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -47,11 +46,13 @@ optgroup {
 }
 
 #map {
+  border: 1px solid #e0e0e0;
+  /* positioning is complicated */
   position: absolute;
-  top: 65px; /* room for header */
-  left: 150px;
-  height: calc(100% - 65px);
-  width: calc(100% - 150px);
+  top: 70px; /* room for header */
+  left: 185px;
+  height: calc(100% - 85px);
+  width: calc(100% - 205px);
 }
 
 path {
