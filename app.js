@@ -27,9 +27,11 @@ var EDIT_MODE = -1;
 var NOT_DRAWING_PATH = 0;
 var STARTED_PATH = 1;
 //
+var hoverIdCount = 0;
+//
 var lastPointDrawn;
 var lastHoverLine;
-var hoverPoint;
+var hoverPointId;
 //
 $('#map')
   //
@@ -52,12 +54,11 @@ $('#map')
         // draw next hover line
       }
       // remove last hover point
-      if(hoverPoint) {
-        $(hoverPoint).detach();
+      if(hoverPointId) {
+        $('#'+hoverPointId).detach();
       }
       // draw hover point
-      console.log('drawing hoverPoint');
-      hoverPoint = drawNode(s.x, s.y);
+      hoverPointId = drawNode(s.x, s.y);
     }
   });
 
@@ -90,16 +91,21 @@ function drawNode(x, y) {
   // scale x/y so cursor is in the center of shape
   x -= size / 2;
   y -= size / 2;
+  // set id
+  var id = 'hover-'+hoverIdCount;
   // append x/y rect to DOM
   var r = ' <rect ';
-  r += 'x=\"' + x
+  r += 'id = \"'+ id
+    + '\" x=\"' + x
     + '\" y=\"' + y
     + '\" width=\"' + size
     + '\" height=\"' + size
     + '\"/>';
+  // increment id
+  hoverIdCount++;
   // hack hack hackity hack
   $('#map')[0].innerHTML += r; 
-  return r;
+  return id;
 }
 
 function edit() {
