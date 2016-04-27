@@ -6,30 +6,17 @@ console.log('app.js loaded');
 
 $('#map').click(function(evt) {
   //
-  var s = scaleCoordsInMap(evt.clientX,evt.clientY);
-  var sx = s[0];
-  var sy = s[1];
-  //
-  console.log('x:',sx,'\ty:',sy);
-  drawNode(sx,sy);
+  var s = scaleCoordsInMap(evt);
+  // console.log('s:',s);
+  drawNode(s.x,s.y);
 });
 
-function scaleCoordsInMap(x, y) {
-  //
-  var map = $('#map');
-  //
-  var offset = map.offset();
-  x = x - offset.left;
-  y = y - offset.top;
-  //
-  var viewboxMax = 1200;
-  var xMax = map.width();
-  var yMax = map.height();
-  //
-  var sx = (x / xMax) * viewboxMax;
-  var sy = (y / yMax) * viewboxMax;
-  //
-  return [sx, sy];
+function scaleCoordsInMap(evt) {
+  /* Thank you, Stack Overflow */
+  var svg = $('svg')[0];
+  var pt = svg.createSVGPoint();
+  pt.x = evt.clientX; pt.y = evt.clientY;
+  return pt.matrixTransform(svg.getScreenCTM().inverse());
 }
 
 var buildingNames = 
