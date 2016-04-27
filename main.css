@@ -68,6 +68,11 @@ path:hover {
   transform: translateY(-5px); /* hop */   
 }
 
+line {
+  stroke: black;
+  stroke-width: 2;
+}
+
 rect {
   /* nodes */
   fill:blue;
