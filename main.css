@@ -12,6 +12,11 @@ body {
   background: #fafafa;
 }
 
+.hidden {
+  /*visibility: hidden;*/
+  display: none;
+}
+
 #header {
   margin-left: 185px;
 }
@@ -26,11 +31,6 @@ body {
 
 #menu > * {
   margin: 15px; 
-}
-
-#edit {
-  padding: 15px;
-  font-size: 18px;
 }
 
 #edit:focus {
@@ -85,13 +85,19 @@ rect {
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
 }
 
+.blue {
+  background-color: #2196f3;
+}
+
+.teal {
+  background-color: #009688;
+}
+
 button {
   cursor: pointer;
   display: inline-block;
   -webkit-tap-highlight-color: transparent;
   z-index: 1;
-  /* Color: blue */
-  background-color: #2196f3;
   /* Important button styling rules */
   border: none;
   border-radius: 2px;
@@ -99,6 +105,9 @@ button {
   letter-spacing: .5px;
   /* Materialize shadow */
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  /* My sizing */
+  padding: 15px;
+  font-size: 18px;
 }
 
 button:hover {

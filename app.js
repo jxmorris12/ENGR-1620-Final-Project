@@ -1,23 +1,6 @@
 // File created by Jack Morris on 04/18/16
 
-console.log('app.js loaded');
-
 /// set funcs
-
-$('#map').click(function(evt) {
-  //
-  var s = scaleCoordsInMap(evt);
-  // console.log('s:',s);
-  drawNode(s.x,s.y);
-});
-
-function scaleCoordsInMap(evt) {
-  /* Thank you, Stack Overflow */
-  var svg = $('svg')[0];
-  var pt = svg.createSVGPoint();
-  pt.x = evt.clientX; pt.y = evt.clientY;
-  return pt.matrixTransform(svg.getScreenCTM().inverse());
-}
 
 var buildingNames = 
   [
@@ -39,10 +22,36 @@ var buildings = {};
 //
 loadBuildingObjects();
 //
-var editing = false;
+var EDIT_MODE = -1;
+// constants
+var NOT_DRAWING_PATH = 0;
+var PATH_STARTED = 1;
 //
+$('#map')
+.click(function(evt) {
+  if(EDIT_MODE < 0) {
+    return;
+  }
+  //
+  var s = scaleCoordsInMap(evt);
+  // console.log('s:',s);
+  drawNode(s.x,s.y);
+})
+.hover(function(evt) {
+
+});
+
+function scaleCoordsInMap(evt) {
+  /* Thank you, Stack Overflow */
+  var svg = $('svg')[0];
+  var pt = svg.createSVGPoint();
+  pt.x = evt.clientX; pt.y = evt.clientY;
+  return pt.matrixTransform(svg.getScreenCTM().inverse());
+}
 function edit() {
-  if(!editing) {
+  if(EDIT_MODE < 0) {
+    /* Start Edit Mode */
+    EDIT_MODE = 0;
     //
     $('path')
       .css('stroke-dasharray','5,5')
@@ -52,8 +61,12 @@ function edit() {
     $('#edit')
       .text('View Mode');
     //
-    editing = true;
+    $('#draw')
+      .hide().slideDown();
+    //
   } else {
+    /* End Edit Mode */
+    EDIT_MODE = -1;
     //
     $('path')
       .css('stroke-dasharray','')
@@ -63,7 +76,9 @@ function edit() {
     $('#edit')
       .text('Content Editor');
     //
-    editing = false;
+    $('#draw')
+      .slideUp(); /* sick animation bro */
+    //
   }
 }
 
