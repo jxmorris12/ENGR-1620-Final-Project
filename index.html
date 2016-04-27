@@ -36,13 +36,13 @@
   <h1 id="header"> SEAS Accessability Map </h1>
   <div class="card" id="menu"> 
     <button class="blue" id="edit" onclick="edit()"> Content Editor </button>
-    <button class="teal hidden" id="draw" onclick="drawPath()"> Draw Path </button>
-    <select class="placeSelect" id="from">
+    <button class="teal hidden" id="draw" onclick="drawPath()"> Start Path </button>
+    <select class="placeSelect hidden" id="from">
       <optgroup id="fromoptgroup">
         <option value="" default selected>Starting Point</option>
       </optgroup>
     </select>
-    <select class="placeSelect" id="destination" placeholder="Destination">
+    <select class="placeSelect hidden" id="destination" placeholder="Destination">
       <optgroup id="destoptgroup">
         <option value="" default selected>Destination</option>
       </optgroup>

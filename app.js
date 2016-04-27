@@ -27,6 +27,9 @@ var EDIT_MODE = -1;
 var NOT_DRAWING_PATH = 0;
 var PATH_STARTED = 1;
 //
+var lastPointDrawn;
+var lastHoverLine;
+//
 $('#map')
 .click(function(evt) {
   if(EDIT_MODE < 0) {
@@ -38,8 +41,30 @@ $('#map')
   drawNode(s.x,s.y);
 })
 .hover(function(evt) {
-
+  // hovering. sick
+  if(EDIT_MODE == PATH_STARTED) {
+    // if there is a last point
+    if(lastPointDrawn) {
+      // remove last hover line drawn
+      // draw next hover line
+    }
+  }
 });
+
+function drawPath() {
+  if(EDIT_MODE == PATH_STARTED) {
+    // end drawing path, save it or some shit
+
+    // done
+    EDIT_MODE = NOT_DRAWING_PATH;
+
+  } else if (EDIT_MODE == NOT_DRAWING_PATH) {
+    // start drawing path
+
+    //done
+    EDIT_MODE = PATH_STARTED;
+  }
+}
 
 function scaleCoordsInMap(evt) {
   /* Thank you, Stack Overflow */
@@ -48,6 +73,7 @@ function scaleCoordsInMap(evt) {
   pt.x = evt.clientX; pt.y = evt.clientY;
   return pt.matrixTransform(svg.getScreenCTM().inverse());
 }
+
 function edit() {
   if(EDIT_MODE < 0) {
     /* Start Edit Mode */
@@ -62,7 +88,11 @@ function edit() {
       .text('View Mode');
     //
     $('#draw')
-      .hide().slideDown();
+      .hide().slideDown(600, 'linear'); 
+        /* Default duration: 400 ms */
+    //
+    $('.placeSelect')
+      .hide().slideDown(600, 'linear');
     //
   } else {
     /* End Edit Mode */
@@ -77,7 +107,10 @@ function edit() {
       .text('Content Editor');
     //
     $('#draw')
-      .slideUp(); /* sick animation bro */
+      .slideUp(600, 'linear'); /* sick animation bro */
+    //
+    $('.placeSelect')
+      .slideUp(600, 'linear');
     //
   }
 }

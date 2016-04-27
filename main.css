@@ -46,7 +46,8 @@ optgroup {
 }
 
 #map {
-  border: 1px solid #e0e0e0;
+  /* Maybe change to dotted border later, I liked that one */
+  border: 1px solid #e0e0e0; 
   /* positioning is complicated */
   position: absolute;
   top: 70px; /* room for header */
