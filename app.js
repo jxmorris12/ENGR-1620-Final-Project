@@ -25,44 +25,53 @@ loadBuildingObjects();
 var EDIT_MODE = -1;
 // constants
 var NOT_DRAWING_PATH = 0;
-var PATH_STARTED = 1;
+var STARTED_PATH = 1;
 //
 var lastPointDrawn;
 var lastHoverLine;
+var hoverPoint;
 //
 $('#map')
-.click(function(evt) {
-  if(EDIT_MODE < 0) {
-    return;
-  }
   //
-  var s = scaleCoordsInMap(evt);
-  // console.log('s:',s);
-  drawNode(s.x,s.y);
-})
-.hover(function(evt) {
-  // hovering. sick
-  if(EDIT_MODE == PATH_STARTED) {
-    // if there is a last point
-    if(lastPointDrawn) {
-      // remove last hover line drawn
-      // draw next hover line
+  .click(function(evt) {
+    if(EDIT_MODE < 0) {
+      return;
     }
-  }
-});
+    //
+    var s = scaleCoordsInMap(evt);
+    drawNode(s.x,s.y);
+  })
+  //
+  .hover(function(evt) {
+    // hovering. sick
+    if(EDIT_MODE == STARTED_PATH) {
+      var s = scaleCoordsInMap(evt);
+      // if there is a last point, draw hover line
+      if(lastPointDrawn) {
+        // remove last hover line drawn
+        // draw next hover line
+      }
+      // remove last hover point
+      if(hoverPoint) {
+        $(hoverPoint).detach();
+      }
+      // draw hover point
+      hoverPoint = drawNode(s.x, s.y);
+    }
+  });
 
-function drawPath() {
-  if(EDIT_MODE == PATH_STARTED) {
+function drawPathClicked() {
+  if(EDIT_MODE == STARTED_PATH) {
     // end drawing path, save it or some shit
-
     // done
+    $('#draw').text('Start Path');
     EDIT_MODE = NOT_DRAWING_PATH;
-
   } else if (EDIT_MODE == NOT_DRAWING_PATH) {
     // start drawing path
 
     //done
-    EDIT_MODE = PATH_STARTED;
+    $('#draw').text('End Path');
+    EDIT_MODE = STARTED_PATH;
   }
 }
 
@@ -74,10 +83,28 @@ function scaleCoordsInMap(evt) {
   return pt.matrixTransform(svg.getScreenCTM().inverse());
 }
 
+
+function drawNode(x, y) {
+  var size = 10;
+  // scale x/y so cursor is in the center of shape
+  x -= size / 2;
+  y -= size / 2;
+  // append x/y rect to DOM
+  var r = ' <rect ';
+  r += 'x=\"' + x
+    + '\" y=\"' + y
+    + '\" width=\"' + size
+    + '\" height=\"' + size
+    + '\"/>';
+  // hack hack hackity hack
+  $('#map')[0].innerHTML += r; 
+  return r;
+}
+
 function edit() {
   if(EDIT_MODE < 0) {
     /* Start Edit Mode */
-    EDIT_MODE = 0;
+    EDIT_MODE = NOT_DRAWING_PATH;
     //
     $('path')
       .css('stroke-dasharray','5,5')
@@ -96,6 +123,10 @@ function edit() {
     //
   } else {
     /* End Edit Mode */
+    //
+    if(EDIT_MODE == STARTED_PATH) {
+      drawPathClicked();
+    }
     EDIT_MODE = -1;
     //
     $('path')
@@ -121,22 +152,6 @@ function loadBuildings() {
     var buildingName = buildingNames[i];
     loadSVGFromAddress(addressBase, buildingName);
   }
-}
-
-function drawNode(x, y) {
-  var size = 10;
-  // scale x/y so cursor is in the center of shape
-  x -= size / 2;
-  y -= size / 2;
-  // append x/y rect to DOM
-  var r = ' <rect ';
-  r += 'x=\"' + x
-    + '\" y=\"' + y
-    + '\" width=\"' + size
-    + '\" height=\"' + size
-    + '\"/>';
-  // hack hack hackity hack
-  $('#map')[0].innerHTML += r; 
 }
 
 
