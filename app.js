@@ -42,7 +42,7 @@ $('#map')
     drawNode(s.x,s.y);
   })
   //
-  .hover(function(evt) {
+  .mousemove(function(evt) {
     // hovering. sick
     if(EDIT_MODE == STARTED_PATH) {
       var s = scaleCoordsInMap(evt);
@@ -56,6 +56,7 @@ $('#map')
         $(hoverPoint).detach();
       }
       // draw hover point
+      console.log('drawing hoverPoint');
       hoverPoint = drawNode(s.x, s.y);
     }
   });
