@@ -74,6 +74,14 @@ path:hover {
 }
 
 .drawnPath {
+  stroke: blue;
+  stroke-opacity: 0.5;
+  stroke-width: 10;
+  fill: none;
+}
+
+.drawnPath:hover {
+  fill: none;
   stroke: purple;
 }
 

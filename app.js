@@ -125,6 +125,7 @@ function startPathClicked() {
 }
 
 function savePathClicked() {
+  /* @TODO: confirm there are points drawn to save */
   // confirm line save & locations with modal
   displaySaveModal(function(saveClicked) {
     console.log('saveClicked',saveClicked);
@@ -141,16 +142,18 @@ function savePathClicked() {
 }
 function savePath() {
   // change 'lines' to svg 'path' element
+  // save the last point drawn
+  pathPoints.push( lastPointDrawn );
   // get first point
   var P = '<path class="drawnPath" d="';
   var x = parseInt ( $('#'+pathPoints[0]).attr('cx') ) ;
-  var y = parseInt ( $('#'+pathPoints[0]).attr('cx') ) ;
+  var y = parseInt ( $('#'+pathPoints[0]).attr('cy') ) ;
   P += 'M' + x + ' ' + y;
   // add lines to all subsequent points
   for(var i = 1; i < pathPoints.length; i++) {
     var point = pathPoints[i];
     x = parseInt ( $('#'+point).attr('cx') ) ;
-    y = parseInt ( $('#'+point).attr('cx') ) ;
+    y = parseInt ( $('#'+point).attr('cy') ) ;
     P += ' L ' + x + ' ' + y;
   }
   P += ' " />';
