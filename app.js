@@ -74,8 +74,8 @@ function hoverPoint(evt) {
     var id = 'l-' + lineIdCount;
     lineIdCount++;
     // calc line pos
-    var Lx = parseInt ( $('#'+lastPointDrawn).attr('x') ) + pathNodeSize/2;
-    var Ly = parseInt( $('#'+lastPointDrawn).attr('y') ) + pathNodeSize/2; 
+    var Lx = parseInt ( $('#'+lastPointDrawn).attr('cx') ) + pathNodeSize/2;
+    var Ly = parseInt( $('#'+lastPointDrawn).attr('cy') ) + pathNodeSize/2; 
     // draw next hover line
     var L = ' <line id='
       + '"' + id
@@ -141,19 +141,15 @@ function scaleCoordsInMap(evt) {
 
 
 function drawNode(x, y) {
-  // scale x/y so cursor is in the center of shape
-  x -= pathNodeSize / 2;
-  y -= pathNodeSize / 2;
   // set id
   var id = 'p-'+pointIdCount;
   // append x/y rect to DOM
-  var r = ' <rect ';
-  r += 'id = \"'+ id
-    + '\" x=\"' + x
-    + '\" y=\"' + y
-    + '\" width=\"' + pathNodeSize
-    + '\" height=\"' + pathNodeSize
-    + '\"/>';
+  var r = ' <circle ';
+  r += 'id = "'+ id
+    + '" cx="' + x
+    + '" cy="' + y
+    + '" r="' + pathNodeSize
+    + '"/>';
   // increment id
   pointIdCount++;
   // hack hack hackity hack

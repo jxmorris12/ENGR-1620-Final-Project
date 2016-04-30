@@ -79,7 +79,7 @@ line {
   stroke-width: 10;
 }
 
-rect {
+circle {
   /* nodes */
   fill:blue;
   fill-opacity:0.5;
