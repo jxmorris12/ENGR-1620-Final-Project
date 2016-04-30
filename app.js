@@ -56,7 +56,7 @@ $('#map')
   });
 
 function clickPoint(evt) {
-  if(EDIT_MODE < 0) {
+  if(EDIT_MODE <= 0) {
     return;
   }
   //
@@ -81,7 +81,7 @@ function clickPoint(evt) {
 }
 
 function hoverPoint(evt) {
-  if(EDIT_MODE != EDIT_MODE_STARTED_PATH) {
+  if(EDIT_MODE <= 0) {
     return;
   }
   var s = scaleCoordsInMap(evt);
@@ -126,10 +126,39 @@ function startPathClicked() {
 
 function savePathClicked() {
   // confirm line save & locations with modal
+  displaySaveModal(function(saveClicked) {
+    console.log('saveClicked',saveClicked);
+    // hide modal
+    $('#saveModal')
+      .fadeOut(600, 'linear');
+    // evaluate
+    if(saveClicked) {
+      savePath();
+    } else {
+      // do nothing
+    }
+  });
+}
+function savePath() {
   // change 'lines' to svg 'path' element
+  // get first point
+  var P = '<path class="drawnPath" d="';
+  var x = parseInt ( $('#'+pathPoints[0]).attr('cx') ) ;
+  var y = parseInt ( $('#'+pathPoints[0]).attr('cx') ) ;
+  P += 'M' + x + ' ' + y;
+  // add lines to all subsequent points
+  for(var i = 1; i < pathPoints.length; i++) {
+    var point = pathPoints[i];
+    x = parseInt ( $('#'+point).attr('cx') ) ;
+    y = parseInt ( $('#'+point).attr('cx') ) ;
+    P += ' L ' + x + ' ' + y;
+  }
+  P += ' " />';
+  // draw path
+  $('#map')[0].innerHTML += P; 
   // save to file
-  // fix buttons
-  showNewPathButton();
+  // clear all old stuff
+  clearPathClicked(); // weird, but works!
 }
 
 function clearPathClicked() {
@@ -261,6 +290,26 @@ function edit() {
       .slideUp(600, 'linear');
     //
   }
+}
+
+function displaySaveModal(callback) {
+  $('#saveModal')
+    .hide().fadeIn(600, 'linear');
+  // wait for button events
+  //
+  $('#saveBack')
+    .click(function(evt) {
+      // saved = false
+      callback(false);
+    });
+  //
+
+  $('#saveSave')
+    .click(function(evt) {
+      // saved = true
+      callback(true);
+    });
+  //
 }
 
 function loadBuildings() {

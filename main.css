@@ -73,6 +73,10 @@ path:hover {
   transform: translateY(-5px); /* hop */   
 }
 
+.drawnPath {
+  stroke: purple;
+}
+
 line {
   stroke: blue;
   stroke-opacity:0.5;
