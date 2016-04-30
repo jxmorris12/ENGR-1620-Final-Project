@@ -33,16 +33,19 @@
 </head>
 
 <body>
+  <!-- @TODO: Fix CSS for phones -->
   <h1 id="header"> SEAS Accessability Map </h1>
+  <!-- @TODO: Make this a retractable side menu -->
   <div class="card" id="menu"> 
     <button class="blue" id="edit" onclick="edit()"> Content Editor </button>
     <div class="hidden" id="pathButtons">
-      <button class="teal" id="draw" onclick="startPathClicked()"> Start Path </button>
+      <button class="amber" id="draw" onclick="startPathClicked()"> Start Path </button> <!-- Teal or Amber? -->
       <div class="hidden" id="endPathButtons">
         <button class="amber" id="draw" onclick="savePathClicked()"> Save Path </button>
         <button class="amber" id="draw" onclick="clearPathClicked()"> Clear Path </button>
       </div>
     </div>
+    <!-- @TODO: Format this list, because right now it looks terible -->
     <select class="placeSelect hidden" id="from">
       <optgroup id="fromoptgroup">
         <option value="" default selected>Starting Point</option>

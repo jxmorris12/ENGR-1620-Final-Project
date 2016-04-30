@@ -1,7 +1,8 @@
 // File created by Jack Morris on 04/18/16
-
-/// set funcs
-
+//
+//
+//
+var buildings = {};
 var buildingNames = 
   [
   "Bavaro",
@@ -18,16 +19,14 @@ var buildingNames =
   "Thornton",
   "Wilsdorf"
   ];
-var buildings = {};
 //
 loadBuildingObjects();
 //
-var pathNodeSize = 20;
+var pathNodeSize = 10;
 //
-var EDIT_MODE = -1;
-// constants
-var NOT_DRAWING_PATH = 0;
-var STARTED_PATH = 1;
+var EDIT_MODE                  = -1;
+var EDIT_MODE_NOT_STARTED_PATH = 0;
+var EDIT_MODE_STARTED_PATH     = 1;
 //
 var pointIdCount = 0;
 var lineIdCount = 0;
@@ -36,7 +35,8 @@ var lastPointDrawn;
 var lastHoverLine;
 var hoverPointId;
 //
-var thisLinePoints = [];
+var pathPoints = [];
+var pathLines  = [];
 //
 $('#map')
   //
@@ -54,13 +54,23 @@ function clickPoint(evt) {
   if(EDIT_MODE < 0) {
     return;
   }
- //
+  //
   var s = scaleCoordsInMap(evt);
-  lastPointDrawn = drawNode(s.x,s.y);
+  var thisPoint = drawNode(s.x,s.y);
+  //
+  if(lastPointDrawn) {
+    // save the last point drawn
+    pathPoints.push( lastPointDrawn );
+    //
+    var thisLine = drawLine
+    //
+  }
+  // set new last point
+  lastPointDrawn = thisPoint;
 }
 
 function hoverPoint(evt) {
-  if(EDIT_MODE != STARTED_PATH) {
+  if(EDIT_MODE != EDIT_MODE_STARTED_PATH) {
     return;
   }
   var s = scaleCoordsInMap(evt);
@@ -70,25 +80,12 @@ function hoverPoint(evt) {
     if(lastHoverLine) {
       $('#'+lastHoverLine).detach();
     }
-    // set new id
-    var id = 'l-' + lineIdCount;
-    lineIdCount++;
     // calc line pos
-    var Lx = parseInt ( $('#'+lastPointDrawn).attr('cx') ) + pathNodeSize/2;
-    var Ly = parseInt( $('#'+lastPointDrawn).attr('cy') ) + pathNodeSize/2; 
-    // draw next hover line
-    var L = ' <line id='
-      + '"' + id
-      + '" x1 = "' + Lx
-      + '" y1 = "' + Ly
-      + '" x2 = "' + s.x
-      + '" y2 = "' + s.y
-      + '"/>';
-    // set last id
-    lastHoverLine = id;
+    var Lx = parseInt ( $('#'+lastPointDrawn).attr('cx') ) ;
+    var Ly = parseInt ( $('#'+lastPointDrawn).attr('cy') ) ;
+    // draw next hover line and set last id
+    lastHoverLine = drawLine(Lx, Ly, s.x, s.y);
   }
-  // hack hack hackity hack
-  $('#map')[0].innerHTML += L; 
   // remove last hover point
   if(hoverPointId) {
     $('#'+hoverPointId).detach();
@@ -105,7 +102,7 @@ function startPathClicked() {
   $('#endPathButtons')
     .hide().fadeIn(600, 'linear'); 
   // change edit mode
-  EDIT_MODE = STARTED_PATH;
+  EDIT_MODE = EDIT_MODE_STARTED_PATH;
 }
 
 function savePathClicked() {
@@ -139,6 +136,23 @@ function scaleCoordsInMap(evt) {
   return pt.matrixTransform(svg.getScreenCTM().inverse());
 }
 
+function drawLine(x1, y1, x2, y2) {
+  // set new id
+  var id = 'l-' + lineIdCount;
+  lineIdCount++;
+  // draw next hover line
+  var L = ' <line id='
+    + '"' + id
+    + '" x1 = "' + x1
+    + '" y1 = "' + y1
+    + '" x2 = "' + x2
+    + '" y2 = "' + y2
+    + '"/>';
+  // hack hack hackity hack
+  $('#map')[0].innerHTML += L; 
+  // return id
+  return id;
+}
 
 function drawNode(x, y) {
   // set id
@@ -160,7 +174,7 @@ function drawNode(x, y) {
 function edit() {
   if(EDIT_MODE < 0) {
     /* Start Edit Mode */
-    EDIT_MODE = NOT_DRAWING_PATH;
+    EDIT_MODE = EDIT_MODE_NOT_STARTED_PATH;
     //
     $('path')
       .css('stroke-dasharray','5,5')
@@ -180,7 +194,7 @@ function edit() {
   } else {
     /* End Edit Mode */
     //
-    if(EDIT_MODE == STARTED_PATH) {
+    if(EDIT_MODE == EDIT_MODE_STARTED_PATH) {
       drawPathClicked();
     }
     EDIT_MODE = -1;
