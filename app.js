@@ -125,10 +125,22 @@ function startPathClicked() {
 }
 
 function savePathClicked() {
-  /* @TODO: confirm there are points drawn to save */
+  //
+  var loc = $('#from').find(':selected').val();
+  var to = $('#to').find(':selected').val();
+  /* @TODO: Something nicer than alerts */
+  if(!loc && !to) { 
+    alert('Please choose a location and a destination.');
+    return;
+  } else if(!loc) { 
+    alert('Please choose a location.');
+    return;
+  } else if(!to) { 
+    alert('Please choose a destination.');
+    return;
+  }
   // confirm line save & locations with modal
   displaySaveModal(function(saveClicked) {
-    console.log('saveClicked',saveClicked);
     // hide modal
     $('#saveModal')
       .fadeOut(600, 'linear');
@@ -136,12 +148,14 @@ function savePathClicked() {
     if(saveClicked) {
       savePath();
     } else {
-      // do nothing
+      // do nothing - just stay in path draw mode
     }
   });
 }
 
-/* @TODO: Delete paths & persist delete */
+/* 
+  @TODO: Delete paths & persist deletion to file 
+*/
 
 function savePath() {
   // change 'lines' to svg 'path' element
@@ -275,7 +289,7 @@ function edit() {
     /* End Edit Mode */
     //
     if(EDIT_MODE == EDIT_MODE_STARTED_PATH) {
-      drawPathClicked();
+      clearPathClicked();
     }
     EDIT_MODE = -1;
     //
