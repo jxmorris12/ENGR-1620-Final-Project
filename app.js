@@ -36,54 +36,66 @@ var lastPointDrawn;
 var lastHoverLine;
 var hoverPointId;
 //
+var thisLinePoints = [];
+//
 $('#map')
   //
   .click(function(evt) {
-    if(EDIT_MODE < 0) {
-      return;
-    }
-    //
-    var s = scaleCoordsInMap(evt);
-    lastPointDrawn = drawNode(s.x,s.y);
+    // wow, we clicked
+    clickPoint(evt);
   })
   //
   .mousemove(function(evt) {
     // hovering. sick
-    if(EDIT_MODE == STARTED_PATH) {
-      var s = scaleCoordsInMap(evt);
-      // if there is a last point, draw hover line
-      if(lastPointDrawn) {
-        // remove last hover line drawn, if it exists
-        if(lastHoverLine) {
-          $('#'+lastHoverLine).detach();
-        }
-        // set new id
-        var id = 'l-' + lineIdCount;
-        lineIdCount++;
-        // calc line pos
-        var Lx = $('#'+lastPointDrawn).attr('x') + nodeSize;
-        var Ly = $('#'+lastPointDrawn).attr('y') + nodeSize;
-        // draw next hover line
-        var L = ' <line id='
-          + '"' + id
-          + '" x1 = "' + Lx
-          + '" y1 = "' + Ly
-          + '" x2 = "' + s.x
-          + '" y2 = "' + s.y
-          + '"/>';
-        // set last id
-        lastHoverLine = id;
-      }
-      // hack hack hackity hack
-      $('#map')[0].innerHTML += L; 
-      // remove last hover point
-      if(hoverPointId) {
-        $('#'+hoverPointId).detach();
-      }
-      // draw hover point
-      hoverPointId = drawNode(s.x, s.y);
-    }
+    hoverPoint(evt);
   });
+
+function clickPoint(evt) {
+  if(EDIT_MODE < 0) {
+    return;
+  }
+ //
+  var s = scaleCoordsInMap(evt);
+  lastPointDrawn = drawNode(s.x,s.y);
+}
+
+function hoverPoint(evt) {
+  if(EDIT_MODE != STARTED_PATH) {
+    return;
+  }
+  var s = scaleCoordsInMap(evt);
+  // if there is a last point, draw hover line
+  if(lastPointDrawn) {
+    // remove last hover line drawn, if it exists
+    if(lastHoverLine) {
+      $('#'+lastHoverLine).detach();
+    }
+    // set new id
+    var id = 'l-' + lineIdCount;
+    lineIdCount++;
+    // calc line pos
+    var Lx = $('#'+lastPointDrawn).attr('x') + nodeSize;
+    var Ly = $('#'+lastPointDrawn).attr('y') + nodeSize;
+    // draw next hover line
+    var L = ' <line id='
+      + '"' + id
+      + '" x1 = "' + Lx
+      + '" y1 = "' + Ly
+      + '" x2 = "' + s.x
+      + '" y2 = "' + s.y
+      + '"/>';
+    // set last id
+    lastHoverLine = id;
+  }
+  // hack hack hackity hack
+  $('#map')[0].innerHTML += L; 
+  // remove last hover point
+  if(hoverPointId) {
+    $('#'+hoverPointId).detach();
+  }
+  // draw hover point
+  hoverPointId = drawNode(s.x, s.y);
+}
 
 function startPathClicked() {
   // hide draw button
