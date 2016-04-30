@@ -29,7 +29,7 @@ var EDIT_MODE_NOT_STARTED_PATH = 0;
 var EDIT_MODE_STARTED_PATH     = 1;
 //
 var pointIdCount = 0;
-var lineIdCount = 0;
+var lineIdCount  = 0;
 //
 var lastPointDrawn;
 var lastHoverLine;
@@ -48,6 +48,11 @@ $('#map')
   .mousemove(function(evt) {
     // they're hovering, sick
     hoverPoint(evt);
+  })
+  .mouseleave(function(evt) {
+    // remove hover line and point when cursor leaves frame
+    removeHoverLine();
+    removeHoverPoint();
   });
 
 function clickPoint(evt) {
@@ -91,9 +96,7 @@ function hoverPoint(evt) {
     lastHoverLine = drawLine(Lx, Ly, s.x, s.y);
   }
   // remove last hover point
-  if(lastHoverPoint) {
-    $('#'+lastHoverPoint).detach();
-  }
+  removeHoverPoint();
   // draw hover point
   lastHoverPoint = drawNode(s.x, s.y);
 }
@@ -101,6 +104,12 @@ function hoverPoint(evt) {
 function removeHoverLine() {
   if(lastHoverLine) {
     $('#'+lastHoverLine).detach();
+  }
+}
+
+function removeHoverPoint() {
+  if(lastHoverPoint) {
+    $('#'+lastHoverPoint).detach();
   }
 }
 

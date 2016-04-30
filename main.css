@@ -86,8 +86,41 @@ circle {
   border-radius: 50%; /*circle haha...doesnt work*/
 }
 
+/* material icon class fix */
+.icon {
+  color: white;
+  /* left */
+  float: left;
+  margin-right: -8px; /* Weird hack */
+}
 
-/* Via Materialize CSS */
+/* Begin Jack's Modal */
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal-content > button {
+  padding: 10px;
+}
+
+/* End Jack's Modal */
+
+/* Begin Materialize CSS */
+
 .card {
   position: relative;
   margin: 0.5rem 0 1rem 0;

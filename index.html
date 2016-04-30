@@ -57,8 +57,22 @@
       </optgroup>
     </select>
   </div>
-  <svg id="map" viewBox="0 0 1200 1200" preserveAspectRatio="xMidYMid meet"> </svg>
+  <!-- @TODO: Figure out this preserveAspectRatio business -->
+  <svg id="map" viewBox="0 0 1200 1200" preserveAspectRatio="xMidYMid meet"> </svg> 
 </body>
+
+<!-- Save Modal -->
+<div id="saveModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content card">
+    <span class="close">x</span>
+    <p>Some text in the Modal..</p>
+    <!-- bottom buttons -->
+    <button class="teal"> <i class="material-icons icon right" style="vertical-align:bottom">navigate_before</i>Back</button>
+    <button class="teal"><i class="material-icons icon right" style="vertical-align:bottom">edit</i>Save</button>
+  </div>
+
+</div>
 
 <script type="text/javascript" src="SEAS_map/app.js"></script>
 
