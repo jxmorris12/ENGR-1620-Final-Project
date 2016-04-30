@@ -22,7 +22,7 @@ var buildings = {};
 //
 loadBuildingObjects();
 //
-var nodeSize = 10;
+var pathNodeSize = 20;
 //
 var EDIT_MODE = -1;
 // constants
@@ -74,8 +74,8 @@ function hoverPoint(evt) {
     var id = 'l-' + lineIdCount;
     lineIdCount++;
     // calc line pos
-    var Lx = $('#'+lastPointDrawn).attr('x') + nodeSize;
-    var Ly = $('#'+lastPointDrawn).attr('y') + nodeSize;
+    var Lx = parseInt ( $('#'+lastPointDrawn).attr('x') ) + pathNodeSize/2;
+    var Ly = parseInt( $('#'+lastPointDrawn).attr('y') ) + pathNodeSize/2; 
     // draw next hover line
     var L = ' <line id='
       + '"' + id
@@ -142,8 +142,8 @@ function scaleCoordsInMap(evt) {
 
 function drawNode(x, y) {
   // scale x/y so cursor is in the center of shape
-  x -= nodeSize / 2;
-  y -= nodeSize / 2;
+  x -= pathNodeSize / 2;
+  y -= pathNodeSize / 2;
   // set id
   var id = 'p-'+pointIdCount;
   // append x/y rect to DOM
@@ -151,8 +151,8 @@ function drawNode(x, y) {
   r += 'id = \"'+ id
     + '\" x=\"' + x
     + '\" y=\"' + y
-    + '\" width=\"' + nodeSize
-    + '\" height=\"' + nodeSize
+    + '\" width=\"' + pathNodeSize
+    + '\" height=\"' + pathNodeSize
     + '\"/>';
   // increment id
   pointIdCount++;
