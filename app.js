@@ -61,8 +61,14 @@ function clickPoint(evt) {
   if(lastPointDrawn) {
     // save the last point drawn
     pathPoints.push( lastPointDrawn );
+    // remove hover line
+    removeHoverLine();
+    // draw 'permanent' line
+    var Lx = parseInt ( $('#'+lastPointDrawn).attr('cx') ) ;
+    var Ly = parseInt ( $('#'+lastPointDrawn).attr('cy') ) ;
     //
-    var thisLine = drawLine
+    var thisLineId = drawLine(Lx, Ly, s.x, s.y, 'stroke:black');
+    pathLines.push( thisLineId );
     //
   }
   // set new last point
@@ -77,9 +83,7 @@ function hoverPoint(evt) {
   // if there is a last point, draw hover line
   if(lastPointDrawn) {
     // remove last hover line drawn, if it exists
-    if(lastHoverLine) {
-      $('#'+lastHoverLine).detach();
-    }
+    removeHoverLine();
     // calc line pos
     var Lx = parseInt ( $('#'+lastPointDrawn).attr('cx') ) ;
     var Ly = parseInt ( $('#'+lastPointDrawn).attr('cy') ) ;
@@ -92,6 +96,12 @@ function hoverPoint(evt) {
   }
   // draw hover point
   hoverPointId = drawNode(s.x, s.y);
+}
+
+function removeHoverLine() {
+  if(lastHoverLine) {
+    $('#'+lastHoverLine).detach();
+  }
 }
 
 function startPathClicked() {
@@ -136,7 +146,7 @@ function scaleCoordsInMap(evt) {
   return pt.matrixTransform(svg.getScreenCTM().inverse());
 }
 
-function drawLine(x1, y1, x2, y2) {
+function drawLine(x1, y1, x2, y2, style) {
   // set new id
   var id = 'l-' + lineIdCount;
   lineIdCount++;
@@ -146,8 +156,12 @@ function drawLine(x1, y1, x2, y2) {
     + '" x1 = "' + x1
     + '" y1 = "' + y1
     + '" x2 = "' + x2
-    + '" y2 = "' + y2
-    + '"/>';
+    + '" y2 = "' + y2;
+  if(style) {
+    L += '" style = "' + style;
+  }
+  L += '"/>';
+
   // hack hack hackity hack
   $('#map')[0].innerHTML += L; 
   // return id
