@@ -140,11 +140,14 @@ function savePathClicked() {
     }
   });
 }
+
+/* @TODO: Delete paths & persist delete */
+
 function savePath() {
   // change 'lines' to svg 'path' element
-  // save the last point drawn
+    // save the last point drawn
   pathPoints.push( lastPointDrawn );
-  // get first point
+    // get first point
   var P = '<path class="drawnPath" d="';
   var x = parseInt ( $('#'+pathPoints[0]).attr('cx') ) ;
   var y = parseInt ( $('#'+pathPoints[0]).attr('cy') ) ;
@@ -157,9 +160,9 @@ function savePath() {
     P += ' L ' + x + ' ' + y;
   }
   P += ' " />';
-  // draw path
+  // draw path on svg
   $('#map')[0].innerHTML += P; 
-  // save to file
+  // @TODO: save new path to file...
   // clear all old stuff
   clearPathClicked(); // weird, but works!
 }
@@ -226,7 +229,6 @@ function drawLine(x1, y1, x2, y2, style) {
     L += '" style = "' + style;
   }
   L += '"/>';
-
   // hack hack hackity hack
   $('#map')[0].innerHTML += L; 
   // return id
@@ -257,8 +259,7 @@ function edit() {
     //
     $('path')
       .css('stroke-dasharray','5,5')
-      .css('stroke-width','4')
-      .css('stroke','#2196f3');
+      .css('stroke','#333');
     //
     $('#edit')
       .text('View Mode');
@@ -280,7 +281,6 @@ function edit() {
     //
     $('path')
       .css('stroke-dasharray','')
-      .css('stroke-width','1')
       .css('stroke','gray');
     //
     $('#edit')
