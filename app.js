@@ -33,7 +33,7 @@ var lineIdCount = 0;
 //
 var lastPointDrawn;
 var lastHoverLine;
-var hoverPointId;
+var lastHoverPoint;
 //
 var pathPoints = [];
 var pathLines  = [];
@@ -41,12 +41,12 @@ var pathLines  = [];
 $('#map')
   //
   .click(function(evt) {
-    // wow, we clicked
+    // wow, someone clicked
     clickPoint(evt);
   })
   //
   .mousemove(function(evt) {
-    // hovering. sick
+    // they're hovering, sick
     hoverPoint(evt);
   });
 
@@ -63,7 +63,7 @@ function clickPoint(evt) {
     pathPoints.push( lastPointDrawn );
     // remove hover line
     removeHoverLine();
-    // draw 'permanent' line
+    // draw ~permanent~ line
     var Lx = parseInt ( $('#'+lastPointDrawn).attr('cx') ) ;
     var Ly = parseInt ( $('#'+lastPointDrawn).attr('cy') ) ;
     //
@@ -91,11 +91,11 @@ function hoverPoint(evt) {
     lastHoverLine = drawLine(Lx, Ly, s.x, s.y);
   }
   // remove last hover point
-  if(hoverPointId) {
-    $('#'+hoverPointId).detach();
+  if(lastHoverPoint) {
+    $('#'+lastHoverPoint).detach();
   }
   // draw hover point
-  hoverPointId = drawNode(s.x, s.y);
+  lastHoverPoint = drawNode(s.x, s.y);
 }
 
 function removeHoverLine() {
@@ -116,20 +116,43 @@ function startPathClicked() {
 }
 
 function savePathClicked() {
-  // do shit
-
+  // confirm line save & locations with modal
+  // change 'lines' to svg 'path' element
+  // save to file
   // fix buttons
   showNewPathButton();
 }
 
 function clearPathClicked() {
-  // do shit
-
-  // fix buttons
+  // remove last (unsaved) point
+  $('#'+lastPointDrawn).detach();
+  // remove hover point
+  $('#'+lastHoverPoint).detach();
+  // remove hover line
+  $('#'+lastHoverLine).detach();
+  // reset vars
+  pointIdCount = 0;
+  lineIdCount = 0;
+  lastPointDrawn = '';
+  lastHoverPoint = '';
+  lastHoverLine = '';
+  // remove queued elements - nodes first
+  while(pathPoints.length > 0) {
+    var id = pathPoints.pop();
+    $('#'+id).detach();
+  }
+  // now lines
+  while(pathLines.length > 0) {
+    var id = pathLines.pop();
+    $('#'+id).detach();
+  }
+  // fix buttons & reset edit mode
   showNewPathButton();
 }
 
 function showNewPathButton() {
+  // change edit mode so we can't draw right now
+  EDIT_MODE = EDIT_MODE_NOT_STARTED_PATH;
   // hide end buttons
   $('#endPathButtons')
     .fadeOut(600, 'linear'); /* sick animation bro */
@@ -142,7 +165,8 @@ function scaleCoordsInMap(evt) {
   /* Thank you, Stack Overflow */
   var svg = $('svg')[0];
   var pt = svg.createSVGPoint();
-  pt.x = evt.clientX; pt.y = evt.clientY;
+  pt.x = evt.clientX; 
+  pt.y = evt.clientY;
   return pt.matrixTransform(svg.getScreenCTM().inverse());
 }
 
