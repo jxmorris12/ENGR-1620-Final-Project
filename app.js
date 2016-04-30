@@ -22,6 +22,8 @@ var buildings = {};
 //
 loadBuildingObjects();
 //
+var nodeSize = 10;
+//
 var EDIT_MODE = -1;
 // constants
 var NOT_DRAWING_PATH = 0;
@@ -58,14 +60,17 @@ $('#map')
         // set new id
         var id = 'l-' + lineIdCount;
         lineIdCount++;
+        // calc line pos
+        var Lx = $('#'+lastPointDrawn).attr('x') + nodeSize;
+        var Ly = $('#'+lastPointDrawn).attr('y') + nodeSize;
         // draw next hover line
         var L = ' <line id='
-          + '\"' + id
-          + '\" x1 = \"' + $('#'+lastPointDrawn).attr('x')
-          + '\"" y1 = \"' + $('#'+lastPointDrawn).attr('y')
-          + '\"" x2 = \"' + s.x
-          + '\"" y2 = \"' + s.y
-          + '\"/>';
+          + '"' + id
+          + '" x1 = "' + Lx
+          + '" y1 = "' + Ly
+          + '" x2 = "' + s.x
+          + '" y2 = "' + s.y
+          + '"/>';
         // set last id
         lastHoverLine = id;
       }
@@ -80,19 +85,38 @@ $('#map')
     }
   });
 
-function drawPathClicked() {
-  if(EDIT_MODE == STARTED_PATH) {
-    // end drawing path, save it or some shit
-    // done
-    $('#draw').text('Start Path');
-    EDIT_MODE = NOT_DRAWING_PATH;
-  } else if (EDIT_MODE == NOT_DRAWING_PATH) {
-    // start drawing path
+function startPathClicked() {
+  // hide draw button
+  $('#draw')
+    .fadeOut(600, 'linear'); /* sick animation bro */
+  // unhide other ones
+  $('#endPathButtons')
+    .hide().fadeIn(600, 'linear'); 
+  // change edit mode
+  EDIT_MODE = STARTED_PATH;
+}
 
-    //done
-    $('#draw').text('End Path');
-    EDIT_MODE = STARTED_PATH;
-  }
+function savePathClicked() {
+  // do shit
+
+  // fix buttons
+  showNewPathButton();
+}
+
+function clearPathClicked() {
+  // do shit
+
+  // fix buttons
+  showNewPathButton();
+}
+
+function showNewPathButton() {
+  // hide end buttons
+  $('#endPathButtons')
+    .fadeOut(600, 'linear'); /* sick animation bro */
+  // unhide new path
+  $('#draw')
+    .hide().fadeIn(600, 'linear'); 
 }
 
 function scaleCoordsInMap(evt) {
@@ -105,10 +129,9 @@ function scaleCoordsInMap(evt) {
 
 
 function drawNode(x, y) {
-  var size = 10;
   // scale x/y so cursor is in the center of shape
-  x -= size / 2;
-  y -= size / 2;
+  x -= nodeSize / 2;
+  y -= nodeSize / 2;
   // set id
   var id = 'p-'+pointIdCount;
   // append x/y rect to DOM
@@ -116,8 +139,8 @@ function drawNode(x, y) {
   r += 'id = \"'+ id
     + '\" x=\"' + x
     + '\" y=\"' + y
-    + '\" width=\"' + size
-    + '\" height=\"' + size
+    + '\" width=\"' + nodeSize
+    + '\" height=\"' + nodeSize
     + '\"/>';
   // increment id
   pointIdCount++;
@@ -139,7 +162,7 @@ function edit() {
     $('#edit')
       .text('View Mode');
     //
-    $('#draw')
+    $('#pathButtons')
       .hide().slideDown(600, 'linear'); 
         /* Default duration: 400 ms */
     //
@@ -162,7 +185,7 @@ function edit() {
     $('#edit')
       .text('Content Editor');
     //
-    $('#draw')
+    $('#pathButtons')
       .slideUp(600, 'linear'); /* sick animation bro */
     //
     $('.placeSelect')

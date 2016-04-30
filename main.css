@@ -13,7 +13,6 @@ body {
 }
 
 .hidden {
-  /*visibility: hidden;*/
   display: none;
 }
 
@@ -39,6 +38,12 @@ body {
 
 .placeSelect {
   width: 80%;
+}
+
+#endPathButtons > * {
+  padding: 10px;
+  font-size: 15px;
+  margin-top: 5px;
 }
 
 optgroup {
@@ -69,15 +74,16 @@ path:hover {
 }
 
 line {
-  stroke: black;
-  stroke-width: 2;
+  stroke: blue;
+  stroke-opacity:0.5;
+  stroke-width: 10;
 }
 
 rect {
   /* nodes */
   fill:blue;
   fill-opacity:0.5;
-  border-radius: 50%; /*circle haha*/
+  border-radius: 50%; /*circle haha...doesnt work*/
 }
 
 
@@ -91,6 +97,8 @@ rect {
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
 }
 
+/* Colors */
+
 .blue {
   background-color: #2196f3;
 }
@@ -98,6 +106,12 @@ rect {
 .teal {
   background-color: #009688;
 }
+
+.amber {
+  background-color: #ffc107;
+}
+
+/* End Colors */
 
 button {
   cursor: pointer;
@@ -114,6 +128,7 @@ button {
   /* My sizing */
   padding: 15px;
   font-size: 18px;
+  min-width: 110px; /* To match Edit Button */
 }
 
 button:hover {
