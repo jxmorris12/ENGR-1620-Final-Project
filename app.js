@@ -2,6 +2,7 @@
 //
 //
 //
+// getData();
 var buildings = {};
 var buildingNames = 
   [

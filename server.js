@@ -30,3 +30,14 @@ MongoClient.connect("mongodb://localhost:27017/exampleDb", function(err, db) {
     console.log("We are connected");
   }
 });
+
+/* Basic Routes */
+// GET method route
+app.get('/', function (req, res) {
+  res.send('GET request to the homepage');
+});
+
+// POST method route
+app.post('/', function (req, res) {
+  res.send('POST request to the homepage');
+});
