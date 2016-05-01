@@ -31,6 +31,7 @@ var EDIT_MODE_STARTED_PATH     = 1;
 //
 var pointIdCount = 0;
 var lineIdCount  = 0;
+var buildingLoadedCount = 0;
 //
 var lastPointDrawn;
 var lastHoverLine;
@@ -185,9 +186,9 @@ function savePath() {
   P += '" to="'  + to;
   P += '" />';
   // draw path on svg
-  $('#map')[0].innerHTML += P; 
+  $('#map')[0].innerHTML = P + ('#map')[0].innerHTML; 
   // save new path to file...
-  var el = $('#map').children().last(); //grab element
+  var el = $('#map').children().first(); //grab element
   postPathData(el[0].outerHTML); //string version
   // clear all old stuff
   clearPathClicked(); // weird, but works!
@@ -256,7 +257,7 @@ function drawLine(x1, y1, x2, y2, style) {
   }
   L += '"/>';
   // hack hack hackity hack
-  $('#map')[0].innerHTML += L; 
+  $('#map')[0].innerHTML = $('#map')[0].innerHTML + L; 
   // return id
   return id;
 }
@@ -274,7 +275,7 @@ function drawNode(x, y) {
   // increment id
   pointIdCount++;
   // hack hack hackity hack
-  $('#map')[0].innerHTML += r; 
+  $('#map')[0].innerHTML = $('#map')[0].innerHTML + r; 
   return id;
 }
 
@@ -364,6 +365,11 @@ function loadSVGFromAddress(base, name) {
     //
     svg.append(path.clone());
     //
+    buildingLoadedCount++;
+    if(buildingLoadedCount == buildingNames.length) {
+      loadPathObjects();
+    }
+    //
   });
 }
 //
@@ -379,9 +385,12 @@ function loadBuildingObjects() {
     $('#fromoptgroup').append( dropdown.clone() );
     $('#destoptgroup').append( dropdown.clone() );
     //
+  }
+  // objects created
+  loadBuildings();
 }
 
-function getPathObjects() {
+function loadPathObjects() {
   // query node server 
   getPathData(function(data) {
     pathData = data;
@@ -389,15 +398,10 @@ function getPathObjects() {
     for(var i in pathData) {
       var path = $( pathData[i].trim() );
       // debugger;
-      $('#map').append( path ); 
+      $('#map').prepend( path ); 
     }
     // refresh for some reason
     var n = drawNode(-pathNodeSize,-pathNodeSize);
     $(n).detach();
   });
-}
-// objects created
-loadBuildings();
-// get paths
-getPathObjects();
 }
