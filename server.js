@@ -34,26 +34,29 @@ var pathFilename = 'paths.txt';
 
 // GET method route
 app.get('/', function (req, res) {
-  res.send('GET request to the homepage');
   // grab contents of file
   var data = readFile(pathFilename, function(data) {
     // return contents
-    response.writeHead(200, {'Content-Type': '.txt'});
-    response.write('Data goes here');
-    response.end();
+    res.writeHead(200, {'Content-Type': '.txt'});
+    res.write(' '); // for some reason I need this
+    res.write(data);
+    console.log('read data:',data);
+    res.end();
   });
 });
 
 // POST method route
 app.post('/', function (req, res) {
-  res.send('POST request to the homepage');
-  // get request body
-  var requestBody = '';
-    request.on('data', function(data) {
-    requestBody += data;
-  });
+  console.log('POST called. req:\n',req);
+  console.log();
+  // get req body
+  var reqBody = '';
+  for(var key in req.body) {
+    reqBody += '\n';
+    reqBody += key;
+  }
   // append to paths.txt
-  writeToEndOfFile(pathFilename,requestbody);
+  writeToEndOfFile(pathFilename,reqBody);
 });
 
 /* 
@@ -65,13 +68,13 @@ function readFile(filename, callback) {
       throw err;
     }
     console.log('OK READING FILE: ' + filename);
-    console.log('read from ',filename+':',data);
     callback(data);
   });
 }
 
 function writeToEndOfFile(filename, data) {
   /* TIL: fs.writeFile overwrites file */
+  console.log('writing data:',data,'to file:',filename);
   fs.appendFile(filename, data, function (err) {
     if (err) { 
       return console.log(err);
