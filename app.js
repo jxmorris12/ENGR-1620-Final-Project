@@ -36,6 +36,7 @@ var lastPointDrawn;
 var lastHoverLine;
 var lastHoverPoint;
 //
+var pathData;
 var pathPoints = [];
 var pathLines  = [];
 //
@@ -379,6 +380,15 @@ function loadBuildingObjects() {
 
 function getPathObjects() {
   // query node server 
+  getPathData(function(data) {
+    pathData = data;
+    pathData = pathData.split('\n');
+    for(var i in pathData) {
+      var path = $( pathData[i].trim() );
+      // debugger;
+      $('#map').append( path ); 
+    }
+  });
 }
 // objects created
 loadBuildings();

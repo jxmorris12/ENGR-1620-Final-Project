@@ -54,6 +54,7 @@ app.post('/', function (req, res) {
   }
   // append to paths.txt
   writeToEndOfFile(pathFilename,reqBody);
+  res.sendStatus(200); // equivalent to res.status(200).send('OK')
 });
 
 /* 
