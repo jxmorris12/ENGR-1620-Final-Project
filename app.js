@@ -12,7 +12,7 @@ var buildingNames =
   "Dell 2",
   "Mech",
   "Olsson",
-  "Physical & Life Sciences",
+  "Physical and Life Sciences",
   "Physics",
   "Rice",
   "Ruffner",
@@ -57,6 +57,30 @@ $('#map')
     removeHoverLine();
     removeHoverPoint();
   });
+
+
+function setBuildingHover() {
+  console.log('setting building hover');
+  $('.building').attr('onmouseover','buildingHover(evt)');
+  $('.building').attr('onmouseleave','buildingHoverOut(evt)');
+}
+function buildingHover(evt) {
+  // get name
+  var name = evt.target.id;
+  // show ones with me as loc
+  $( "path[loc='"+name+"']" ).css('visibility','visible');
+  // show ones with me as to
+  $( "path[to='"+name+"']" ).css('visibility','visible');
+}
+
+function buildingHoverOut(evt) {
+  // get name
+  var name = evt.target.id;
+  // hide ones with me as loc
+  $( "path[loc='"+name+"']" ).css('visibility','hidden');
+  // hide ones with me as to
+  $( "path[to='"+name+"']" ).css('visibility','hidden');
+}
 
 function clickPoint(evt) {
   if(EDIT_MODE <= 0) {
@@ -371,6 +395,8 @@ function loadSVGFromAddress(base, name) {
     if(buildingLoadedCount == buildingNames.length) {
       // add building class to all buildings
       svg.find('path').attr('class','building');
+      // set hover func for buildings
+      setBuildingHover();
       // load all paths
       loadPathObjects();
     }

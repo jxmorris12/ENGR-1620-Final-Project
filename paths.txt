@@ -1,0 +1,12 @@
+<path class="drawnPath" d="M485 530 L 463 523 L 442 572 L 418 564" loc="Wilsdorf" to="Chem"></path>
+<path class="drawnPath" d="M753 601 L 696 578 L 682 609 L 627 586" loc="Thornton" to="Wilsdorf"></path>
+<path class="drawnPath" d="M560 716 L 576 669" loc="Mech" to="Wilsdorf"></path>
+<path class="drawnPath" d="M811 339 L 848 234" loc="Physics" to="Ruffner"></path>
+<path class="drawnPath" d="M976 266 L 947 254 L 929 296 L 842 262 L 850 228" loc="Bavaro" to="Ruffner"></path>
+<path class="drawnPath" d="M665 941 L 708 834 L 657 815 L 750 600" loc="Olsson" to="Thornton"></path>
+<path class="drawnPath" d="M517 954 L 540 967 L 562 915 L 488 884 L 502 845" loc="Small" to="Mech"></path>
+<path class="drawnPath" d="M517 954 L 539 965 L 506 1027 L 539 1049" loc="Small" to="Rice"></path>
+<path class="drawnPath" d="M359 783 L 391 795 L 432 687 L 399 669 L 461 522 L 490 530" loc="Chemistry" to="Wilsdorf"></path>
+<path class="drawnPath" d="M500 849 L 409 880 L 374 867 L 357 863 L 393 791 L 364 785" loc="Mech" to="Chemistry"></path>
+<path class="drawnPath" d="M225 716 L 207 710 L 177 791 L 292 836 L 400 878 L 503 846" loc="Physical and Life Sciences" to="Mech"></path>
+<path class="drawnPath" d="M232 718 L 207 710 L 177 789 L 359 862 L 394 791 L 359 781" loc="Physical and Life Sciences" to="Chem"></path>
