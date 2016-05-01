@@ -187,7 +187,8 @@ function savePath() {
   // draw path on svg
   $('#map')[0].innerHTML += P; 
   // save new path to file...
-  postPathData(P);
+  var el = $('#map').children().last(); //grab element
+  postPathData(el[0].outerHTML); //string version
   // clear all old stuff
   clearPathClicked(); // weird, but works!
 }

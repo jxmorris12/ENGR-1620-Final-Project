@@ -51,6 +51,11 @@ app.post('/', function (req, res) {
   for(var key in req.body) {
     reqBody += '\n';
     reqBody += key;
+    if(req.body[key]) {
+      reqBody += '=' + req.body[key]; 
+        // weird glitch: string is split across
+          // key & value
+    }
   }
   // append to paths.txt
   writeToEndOfFile(pathFilename,reqBody);

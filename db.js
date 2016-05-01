@@ -15,12 +15,13 @@ function getPathData(callback) {
 }
 
 function postPathData(data,callback) {
+  console.log(' posting data ',data);
   $.post(baseURL,data,function(data, status) {
     if(status != 'success') {
       console.log('ERROR getting data from',baseURL);
     } else {
-      // should just be 'OK'
-      callback(data);
+      // data should just be 'OK'
+      // callback(data);
     }
   });
 }
