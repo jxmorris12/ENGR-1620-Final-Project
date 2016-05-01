@@ -40,15 +40,12 @@ app.get('/', function (req, res) {
     res.writeHead(200, {'Content-Type': '.txt'});
     res.write(' '); // for some reason I need this
     res.write(data);
-    console.log('read data:',data);
     res.end();
   });
 });
 
 // POST method route
 app.post('/', function (req, res) {
-  console.log('POST called. req:\n',req);
-  console.log();
   // get req body
   var reqBody = '';
   for(var key in req.body) {
@@ -67,7 +64,6 @@ function readFile(filename, callback) {
     if (err) { 
       throw err;
     }
-    console.log('OK READING FILE: ' + filename);
     callback(data);
   });
 }
@@ -79,6 +75,5 @@ function writeToEndOfFile(filename, data) {
     if (err) { 
       return console.log(err);
     }
-    console.log('Successfilly written: ',filename,' > data:', data);
   });
 }
