@@ -186,7 +186,8 @@ function savePath() {
   P += '" to="'  + to;
   P += '" />';
   // draw path on svg
-  $('#map')[0].innerHTML = P + ('#map')[0].innerHTML; 
+  var m = $('#map')[0].innerHTML;
+  $('#map')[0].innerHTML = P + m; 
   // save new path to file...
   var el = $('#map').children().first(); //grab element
   postPathData(el[0].outerHTML); //string version
