@@ -1,3 +1,6 @@
+// File created by Jack Morris on 04/30/16
+//
+//
 var express = require('express'),
     bodyParser      = require('body-parser'),
     methodOverride  = require('method-override'),
@@ -25,22 +28,54 @@ app.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
 });
 
+var pathFilename = 'paths.txt';
+
 /* Basic Routes */
+
 // GET method route
 app.get('/', function (req, res) {
   res.send('GET request to the homepage');
+  // grab contents of file
+  var data = readFile(pathFilename, function(data) {
+    // return contents
+    response.writeHead(200, {'Content-Type': '.txt'});
+    response.write('Data goes here');
+    response.end();
+  });
 });
 
 // POST method route
 app.post('/', function (req, res) {
   res.send('POST request to the homepage');
+  // get request body
+  var requestBody = '';
+    request.on('data', function(data) {
+    requestBody += data;
+  });
+  // append to paths.txt
+  writeToEndOfFile(pathFilename,requestbody);
 });
 
-// helper functions
-function writeFile(filename, data) {
-  fs = require('fs');
-  fs.writeFile(filename, data, function (err) {
-    if (err) return console.log(err);
-    console.log('Hello World > helloworld.txt');
+/* 
+  helper functions
+*/
+function readFile(filename, callback) {
+  fs.readFile(filename, 'utf8', function(err, data) {
+    if (err) { 
+      throw err;
+    }
+    console.log('OK READING FILE: ' + filename);
+    console.log('read from ',filename+':',data);
+    callback(data);
+  });
+}
+
+function writeToEndOfFile(filename, data) {
+  /* TIL: fs.writeFile overwrites file */
+  fs.appendFile(filename, data, function (err) {
+    if (err) { 
+      return console.log(err);
+    }
+    console.log('Successfilly written: ',filename,' > data:', data);
   });
 }
