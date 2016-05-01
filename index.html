@@ -2,8 +2,8 @@
 <html lang="en" ng-app="app">
 <head>
 
-  <!-- <base href="/~jm8wx/">  -->
-  <base href = "/">
+  <base href="/~jm8wx/"> 
+  <!-- <base href = "/"> -->
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -66,11 +66,12 @@
 <div id="saveModal" class="modal hidden">
   <!-- Modal content -->
   <div class="modal-content card">
-    <span class="close">x</span>
-    <h1> Are you sure you want to draw a path from that building to this one!!?! </h1>
+    <h3 style="padding:25px"> Are you sure you want to save this path? </h3>
     <!-- bottom buttons -->
-    <button id="saveBack" class="teal"> <i class="material-icons icon right" style="vertical-align:bottom">navigate_before</i>Back</button>
-    <button id="saveSave" class="teal"><i class="material-icons icon right" style="vertical-align:bottom">edit</i>Save</button>
+    <div style="transform: translateY(-20px);">
+      <button id="saveBack" class="teal"> <i class="material-icons icon right" style="vertical-align:bottom">navigate_before</i>Back</button>
+      <button id="saveSave" class="teal"><i class="material-icons icon right" style="vertical-align:bottom">edit</i>Save</button>
+    </div>
   </div>
 
 </div>

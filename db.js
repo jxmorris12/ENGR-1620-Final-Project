@@ -7,7 +7,7 @@ function getPathData(callback) {
     if(status != 'success') {
       console.log('ERROR getting data from',baseURL);
     } else {
-      console.log("Got data: " + data + "\nStatus: " + status);
+      // console.log("Got data: " + data + "\nStatus: " + status);
       // got data
       callback(data);
     }

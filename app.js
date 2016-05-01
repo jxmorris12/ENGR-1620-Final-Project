@@ -285,7 +285,7 @@ function edit() {
     /* Start Edit Mode */
     EDIT_MODE = EDIT_MODE_NOT_STARTED_PATH;
     //
-    $('path')
+    $('.building')
       .css('stroke-dasharray','5,5')
       .css('stroke','#333');
     //
@@ -307,7 +307,7 @@ function edit() {
     }
     EDIT_MODE = -1;
     //
-    $('path')
+    $('.building')
       .css('stroke-dasharray','')
       .css('stroke','gray');
     //
@@ -361,6 +361,7 @@ function loadSVGFromAddress(base, name) {
   d3.xml(address, "image/svg+xml", function(xml) { 
     var importedNode = $( document.importNode(xml.documentElement, true) );
     var path = importedNode.find("path");
+    path.addClass('building');
     //
     // add mouseover label (later)
     //
@@ -368,6 +369,9 @@ function loadSVGFromAddress(base, name) {
     //
     buildingLoadedCount++;
     if(buildingLoadedCount == buildingNames.length) {
+      // add building class to all buildings
+      svg.find('path').attr('class','building');
+      // load all paths
       loadPathObjects();
     }
     //

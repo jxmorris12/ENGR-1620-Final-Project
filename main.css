@@ -61,13 +61,13 @@ optgroup {
   width: calc(100% - 205px);
 }
 
-path {
+.building {
   fill: #e0e0e0; /* really light gray */
   stroke: gray; /* normal gray */
   transform: translateY(0);
 }
 
-path:hover {
+.building:hover {
   fill: gray;
   stroke: #333;
   transform: translateY(-5px); /* hop */   
@@ -77,6 +77,7 @@ path:hover {
   stroke: blue;
   stroke-opacity: 0.5;
   stroke-width: 10;
+  stroke-linejoin: bevel; /* round ? */
   fill: none;
 }
 
@@ -121,7 +122,7 @@ circle {
   top: 50%;
   left: 50%;
   width: 50%;
-  height: 50%;
+  /*height: 50%;*/
   transform: translate(-50%, -50%);
 }
 
