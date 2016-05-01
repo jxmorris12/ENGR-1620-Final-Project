@@ -58,8 +58,11 @@
     </select>
   </div>
   <!-- @TODO: Figure out this preserveAspectRatio business - Should show the same amount of map on each screen. There shouldn't be 'hidden' parts on some devices, even though there are no buildings there. Just more margin.-->
-  <svg id="map" viewBox="0 0 1200 1200" preserveAspectRatio="xMidYMid meet"> </svg>
-  <!-- @TODO: Filter out which routes show up (theoretically, there will be, at minimum, 13 x 12 = 156 possible routes) -->
+  <svg id="map" viewBox="0 0 1200 1200" preserveAspectRatio="xMidYMid meet"> 
+  </svg>
+  <div id="handle">
+    <i class="material-icons icon right" style="vertical-align:bottom">keyboard_arrow_left</i>
+  </div>
 </body>
 
 <!-- Save Modal -->

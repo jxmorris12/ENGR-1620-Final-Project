@@ -436,3 +436,36 @@ function loadPathObjects() {
     $(n).detach();
   });
 }
+
+var drawerOpen = false;
+// little drawer for controls
+$('#handle').click(function(evt) {
+  if(drawerOpen) {
+    // if drawer closed, open it
+    drawerOpen = false;
+    // move over menu
+    $('#menu').css('transform','translate(0,-50%)');
+    // slide svg right and resize
+    $('#map').css('left','185px')
+             .css('width','calc(100% - 205px)');
+    // move  arrow right and change to a left arrow
+    $('#handle').css('left','185px')
+                .children().first()
+                  .text('keyboard_arrow_left');
+  }
+  else {
+    // if drawer open, close it
+    drawerOpen = true;
+    // move over menu
+    $('#menu').css('transform','translate(-200px,-50%)');
+    // slide svg left and resize
+    $('#map').css('left','10px')
+             .css('width','calc(100% - 20px)');
+    // move arrow left and change to a right arrow
+    $('#handle').css('left','10px')
+                .children().first()
+                  .text('keyboard_arrow_right');
+  }
+});
+
+$('#handle').click(); // close initially

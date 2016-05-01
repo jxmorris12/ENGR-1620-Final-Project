@@ -12,6 +12,14 @@ body {
   background: #fafafa;
 }
 
+body > * {
+  /* Animations. This is bold */
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition:    all 0.5s ease-in-out;
+  -o-transition:      all 0.5s ease-in-out;
+  -ms-transition:     all 0.5s ease-in-out;
+}
+
 .hidden {
   display: none;
 }
@@ -59,6 +67,20 @@ optgroup {
   left: 185px;
   height: calc(100% - 85px);
   width: calc(100% - 205px);
+}
+
+#handle {
+  position: absolute;
+  /*top: calc(70px + (100% - 85px) / 2);*/
+  top: 50%;
+  transform: translateY(-50%);
+  left: 185px;
+}
+
+#handle > i {
+  font-size: 40px;
+  cursor: pointer;
+  color: #888;
 }
 
 .building {
@@ -139,7 +161,6 @@ circle {
   position: relative;
   margin: 0.5rem 0 1rem 0;
   background-color: #fff;
-  transition: box-shadow .25s;
   border-radius: 2px;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
 }
