@@ -51,14 +51,15 @@
         <option value="" default selected>Starting Point</option>
       </optgroup>
     </select>
-    <select class="placeSelect hidden" id="to" placeholder="Destination">
+    <select class="placeSelect hidden" id="to" placeholder="fromDestination">
       <optgroup id="destoptgroup">
         <option value="" default selected>Destination</option>
       </optgroup>
     </select>
   </div>
   <!-- @TODO: Figure out this preserveAspectRatio business - Should show the same amount of map on each screen. There shouldn't be 'hidden' parts on some devices, even though there are no buildings there. Just more margin.-->
-  <svg id="map" viewBox="0 0 1200 1200" preserveAspectRatio="xMidYMid meet"> </svg> 
+  <svg id="map" viewBox="0 0 1200 1200" preserveAspectRatio="xMidYMid meet"> </svg>
+  <!-- @TODO: Filter out which routes show up (theoretically, there will be, at minimum, 13 x 12 = 156 possible routes) -->
 </body>
 
 <!-- Save Modal -->

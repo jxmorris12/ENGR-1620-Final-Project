@@ -158,6 +158,9 @@ function savePathClicked() {
 */
 
 function savePath() {
+  /* @TODO: MUCH nicer way to create elements.... we are
+    using JQuery for a reason, after all! 
+  */
   // change 'lines' to svg 'path' element
     // save the last point drawn
   pathPoints.push( lastPointDrawn );
@@ -173,7 +176,11 @@ function savePath() {
     y = parseInt ( $('#'+point).attr('cy') ) ;
     P += ' L ' + x + ' ' + y;
   }
-  P += ' " />';
+  var loc = $('#from').find(':selected').val();
+  P += '" loc="' + loc;
+  var to = $('#to').find(':selected').val();
+  P += '" to="'  + to;
+  P += '" />';
   // draw path on svg
   $('#map')[0].innerHTML += P; 
   // @TODO: save new path to file...
