@@ -1,14 +1,15 @@
 var express = require('express'),
     bodyParser      = require('body-parser'),
     methodOverride  = require('method-override'),
-    app = express(),
-    // database
-    MongoClient = require('mongodb').MongoClient;
+    fs = require('fs'),
+    app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
+// what does this do
 app.use(methodOverride());      // simulate DELETE and PUT
 
 // CORS (Cross-Origin Resource Sharing) headers to support Cross-site HTTP requests
@@ -24,13 +25,6 @@ app.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
 });
 
-// Connect to the db
-MongoClient.connect("mongodb://localhost:27017/exampleDb", function(err, db) {
-  if(!err) {
-    console.log("We are connected");
-  }
-});
-
 /* Basic Routes */
 // GET method route
 app.get('/', function (req, res) {
@@ -41,3 +35,12 @@ app.get('/', function (req, res) {
 app.post('/', function (req, res) {
   res.send('POST request to the homepage');
 });
+
+// helper functions
+function writeFile(filename, data) {
+  fs = require('fs');
+  fs.writeFile(filename, data, function (err) {
+    if (err) return console.log(err);
+    console.log('Hello World > helloworld.txt');
+  });
+}

@@ -375,7 +375,13 @@ function loadBuildingObjects() {
     $('#fromoptgroup').append( dropdown.clone() );
     $('#destoptgroup').append( dropdown.clone() );
     //
-  }
+}
+
+function getPathObjects() {
+  // query node server 
+}
 // objects created
 loadBuildings();
+// get paths
+getPathObjects();
 }
