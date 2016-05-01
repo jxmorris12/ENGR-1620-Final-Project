@@ -86,6 +86,7 @@ function hoverPoint(evt) {
   if(EDIT_MODE <= 0) {
     return;
   }
+  // debugger;
   var s = scaleCoordsInMap(evt);
   // if there is a last point, draw hover line
   if(lastPointDrawn) {
@@ -185,7 +186,8 @@ function savePath() {
   P += '" />';
   // draw path on svg
   $('#map')[0].innerHTML += P; 
-  // @TODO: save new path to file...
+  // save new path to file...
+  postPathData(P);
   // clear all old stuff
   clearPathClicked(); // weird, but works!
 }
@@ -388,6 +390,9 @@ function getPathObjects() {
       // debugger;
       $('#map').append( path ); 
     }
+    // refresh for some reason
+    var n = drawNode(-pathNodeSize,-pathNodeSize);
+    $(n).detach();
   });
 }
 // objects created
