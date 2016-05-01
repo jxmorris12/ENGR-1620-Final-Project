@@ -443,6 +443,8 @@ $('#handle').click(function(evt) {
   if(drawerOpen) {
     // if drawer closed, open it
     drawerOpen = false;
+    // move header
+    #('#header').css('margin-left','185px');
     // move over menu
     $('#menu').css('transform','translate(0,-50%)');
     // slide svg right and resize
@@ -456,6 +458,8 @@ $('#handle').click(function(evt) {
   else {
     // if drawer open, close it
     drawerOpen = true;
+    // move header
+    #('#header').css('margin-left','');
     // move over menu
     $('#menu').css('transform','translate(-200px,-50%)');
     // slide svg left and resize
